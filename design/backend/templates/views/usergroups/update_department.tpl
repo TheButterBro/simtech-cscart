@@ -49,7 +49,7 @@
         {include file="common/select_status.tpl" input_name="department_data[status]" id="elm_department_status" obj_id=$id obj=$department_data hidden=false}
 
         <div class="control-group">
-            <label class="control-label">{__("manager")}</label>
+            <label class="cm-required control-label">{__("manager")}</label>
             <div class="controls">
                 {include 
                     file="pickers/users/picker.tpl" 
@@ -66,8 +66,8 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label">{__("workers")}</label>
+        <div class="control-group ">
+            <label class="cm-required control-label">{__("workers")}</label>
             <div class="controls">
                 {include 
                     file="pickers/users/picker.tpl" 

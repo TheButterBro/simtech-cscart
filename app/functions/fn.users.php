@@ -5533,9 +5533,8 @@ function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
 
 function fn_delete_department ($department_id) {
     if (!empty($department_id)) {
-        $res = db_query("DELETE FROM ?:departments WHERE department_id = ?i", $department_id);
-        db_query("DELETE FROM ?department_description WHERE department_id =?i", $department_id);
-
+        db_query("DELETE FROM ?:departments WHERE department_id = ?i", $department_id);
+        db_query("DELETE FROM ?:department_descriptions WHERE department_id = ?i", $department_id);
     }
 }
 

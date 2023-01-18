@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     // 
-    // Update/Delete department/departments
+    // Update/Delete departments
     // 
 
     if ($mode == 'update_department') {
@@ -37,17 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $department_id = fn_update_department($data, $department_id);
 
         if ($department_id) {
-            // $suffix = ".update_department?department_id={$department_id}";
             $suffix = ".update_department?department_id={$department_id}";
         } else {
             $suffix = ".add_department";
         }
-
-        // fn_print_die($_REQUEST);
-
-    } elseif ($mode == 'update_departments') {
-
-        fn_print_die($_REQUEST);
 
     } elseif ($mode == 'delete_department') {
 
@@ -55,10 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fn_delete_department($department_id);
 
         $suffix = '.manage_departments';
-
-    } elseif ($mode == 'delete_departments') {
-
-        fn_print_die($_REQUEST);
 
     }
 

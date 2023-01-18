@@ -23,15 +23,7 @@
                 data-ca-bulkedit-component="defaultObject"
             >
             <tr>
-                <th width="6%" class="left mobile-hide">
-                    {include file="common/check_items.tpl" is_check_disabled=!$has_permission check_statuses=($has_permission) ? $department_statuses : '' }
 
-                    <input type="checkbox"
-                        class="bulkedit-toggler hide"
-                        data-ca-bulkedit-disable="[data-ca-bulkedit-default-object=true]"
-                        data-ca-bulkedit-enable="[data-ca-bulkedit-expanded-object=true]"
-                    />
-                </th>
                 <th width="25%">{__("image")}</th>
                 <th><a class="cm-ajax" href="{"`$c_url`&sort_by=name&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("name")}{if $search.sort_by === "name"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a></th>
                 <th width="15%"><a class="cm-ajax" href="{"`$c_url`&sort_by=timestamp&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("creation_date")}{if $search.sort_by === "timestamp"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a></th>
@@ -62,8 +54,6 @@
                 {hook name="banners:manage_data"}
                 {/hook}
                 
-                <td width="6%" class="left mobile-hide">
-                    <input type="checkbox" name="departments_ids[]" value="{$department.department_id}" class="cm-item {$no_hide_input}" /></td>
                 <td width="25%" class="products-list__image">
                     {include
                             file="common/image.tpl"

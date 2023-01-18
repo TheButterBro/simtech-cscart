@@ -4,7 +4,7 @@
 
 <form action="{""|fn_url}" method="post" id="departments_form" name="departments_form" enctype="multipart/form-data">
 <input type="hidden" name="fake" value="1" />
-{include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id="pagination_contents_departments"}
+
 
 {$c_url=$config.current_url|fn_query_remove:"sort_by":"sort_order"}
 
@@ -105,7 +105,7 @@
     <p class="no-items">{__("no_data")}</p>
 {/if}
 
-{include file="common/pagination.tpl" div_id="pagination_contents_departments"}
+{include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id="pagination_contents_departments hidden=true"}
 
 {capture name="adv_buttons"}
     {hook name="banners:adv_buttons"}

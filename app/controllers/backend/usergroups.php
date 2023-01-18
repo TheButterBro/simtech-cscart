@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($department_id) {
             $suffix = ".update_department?department_id={$department_id}";
         } else {
-            $suffix = ".add_department";
+            $suffix = ".manage_departments";
         }
 
     } elseif ($mode == 'delete_department') {
@@ -260,7 +260,6 @@ if ($mode === 'get_privileges') {
 
 } elseif ($mode == 'add_department' || $mode == 'update_department') {
 
-    // fn_print_die('end');
     $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
     $department_data = fn_get_department_data($department_id, DESCR_SL);
 
@@ -277,22 +276,18 @@ if ($mode === 'get_privileges') {
 
     list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL);
 
-    // $page = $search['page'];
-    // $valid_page = db_get_valid_page($page, $search['items_per_page'], $search['total_items']);
+    $page = $search['page'];
+    $valid_page = db_get_valid_page($page, $search['items_per_page'], $search['total_items']);
 
-    // if ($page > $valid_page) {
-    //     $_REQUEST['page'] = $valid_page;
-    //     return [CONTROLLER_STATUS_REDIRECT, Registry::get('config.current_url')];
-    // }
-    // $has_select_permission = fn_check_permissions('products', 'm_delete', 'admin')
-    //     || fn_check_permissions('products', 'export_range', 'admin');
+    if ($page > $valid_page) {
+        $_REQUEST['page'] = $valid_page;
+        return [CONTROLLER_STATUS_REDIRECT, Registry::get('config.current_url')];
+    }
+    $has_select_permission = fn_check_permissions('products', 'm_delete', 'admin')
+        || fn_check_permissions('products', 'export_range', 'admin');
 
     Tygh::$app['view']->assign('departments', $departments);
     Tygh::$app['view']->assign('search', $search);
-
-
-    // fn_print_die(list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL));
-    // fn_print_die('end');
 
 }
 

@@ -306,7 +306,6 @@ if ($mode == 'add') {
     Tygh::$app['session']['continue_url'] = "profiles.departments";
 
     $params = $_REQUEST;
-    $params['items_per_page'] = 3;
 
     list($departments, $search) = fn_get_departments($params, Registry::get('settings.Appearance.products_per_page'), CART_LANGUAGE);
 

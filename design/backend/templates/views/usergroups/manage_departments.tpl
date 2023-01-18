@@ -129,8 +129,8 @@
 
 {capture name="sidebar"}
     {hook name="departments:manage_sidebar"}
-    {include file="common/saved_search.tpl" dispatch="departments.manage" view_type="departments"}
-    {include file="addons/banners/views/banners/components/banners_search_form.tpl" dispatch="departments.manage"}
+    {include file="common/saved_search.tpl" dispatch="usergroups.manage_departments" view_type="departments"}
+    {include file="addons/banners/views/banners/components/departments_search_form.tpl" dispatch="usergroups.manage_departments"}
     {/hook}
 {/capture}
 

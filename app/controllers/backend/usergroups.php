@@ -302,7 +302,7 @@ if ($mode === 'get_privileges') {
     Tygh::$app['view']->assign('search', $search);
 
 
-    // fn_print_die('end');
+    // fn_print_die(list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL));
 
 }
 

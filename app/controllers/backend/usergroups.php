@@ -34,13 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
         $data = !empty($_REQUEST['department_data']) ? $_REQUEST['department_data'] : [];
 
-        $department_id = fn_update_department($data, $department_id);
+
 
         if ($department_id) {
             $suffix = ".update_department?department_id={$department_id}";
         } else {
             $suffix = ".manage_departments";
         }
+
+        $department_id = fn_update_department($data, $department_id);
 
     } elseif ($mode == 'delete_department') {
 

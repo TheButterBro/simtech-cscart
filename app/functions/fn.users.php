@@ -5462,10 +5462,10 @@ function fn_get_departments($params = array(),$items_per_page = 0, $lang_code = 
         $condition .= db_quote(' AND ?:departments.status = ?s', $params['status']);
     }
 
-    // if (!empty($params['period']) && $params['period'] != 'A') {
-    //     list($params['time_from'], $params['time_to']) = fn_create_periods($params);
-    //     $condition .= db_quote(' AND (?:departments.timestamp >= ?i AND ?:departments.timestamp <= ?i)', $params['time_from'], $params['time_to']);
-    // }
+    if (!empty($params['period']) && $params['period'] != 'A') {
+        list($params['time_from'], $params['time_to']) = fn_create_periods($params);
+        $condition .= db_quote(' AND (?:departments.timestamp >= ?i AND ?:departments.timestamp <= ?i)', $params['time_from'], $params['time_to']);
+    }
 
     $fields = array (
         '?:departments.*',
@@ -5502,6 +5502,9 @@ function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
 {
     if (isset($data['timestamp'])) {
         $data['timestamp'] = fn_parse_date($data['timestamp']);
+    }
+    if (isset($data['upd_timestamp'])) {
+        $data['upd_timestamp'] = fn_parse_date($data['upd_timestamp']);
     }
 
     if (!empty($department_id)) {

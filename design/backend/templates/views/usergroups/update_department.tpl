@@ -39,17 +39,40 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label" for="elm_department_timestamp_{$id}">{__("creation_date")}</label>
-            <div class="controls">
-            {include file="common/calendar.tpl" date_id="elm_department_timestamp_`$id`" date_name="department_data[timestamp]" date_val=$department_data.timestamp|default:$smarty.const.TIME start_year=$settings.Company.company_start_year}
+            <div class="control-group {if !$id}hidden{/if}">
+                <label class="control-label" for="elm_department_timestamp_{$id}">{__("creation_date")}</label>
+                <div class="controls">
+                    {include 
+                        file="common/calendar.tpl" 
+                        date_id="elm_department_timestamp_`$id`" 
+                        date_name="department_data[timestamp]" 
+                        date_val=$department_data.timestamp|default:$smarty.const.TIME 
+                        start_year=$settings.Company.company_start_year
+                    }
+                </div>
             </div>
-        </div>
+
+        {if $id}
+            <div class="control-group hidden">
+                <label class="control-label" for="elm_department_timestamp_{$id}">{__("creation_date")}</label>
+                <div class="controls">
+                    {include 
+                        file="common/calendar.tpl" 
+                        date_id="elm_department_upd_timestamp_`$id`" 
+                        date_name="department_data[upd_timestamp]" 
+                        date_val=$department_data.upd_timestamp|default:$smarty.const.TIME 
+                        start_year=$settings.Company.company_start_year
+                    }
+                </div>
+            </div>
+        {/if}
+
+        
 
         {include file="common/select_status.tpl" input_name="department_data[status]" id="elm_department_status" obj_id=$id obj=$department_data hidden=false}
 
         <div class="control-group">
-            <label class="cm-required control-label">{__("manager")}</label>
+            <label class="control-label">{__("manager")}</label>
             <div class="controls">
                 {include 
                     file="pickers/users/picker.tpl" 

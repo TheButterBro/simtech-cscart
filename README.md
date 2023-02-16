@@ -17,10 +17,10 @@
 
   1. SCHOOL-1
      - Создать скелет модуля "Отделы" без функционала.
-     - ПР:
+     - ПР: https://github.com/TheButterBro/simtech-cscart/pull/2
      - 30м
      - Start date: 16.02.2023 17:42
-     - Due date:
+     - Due date: 16.02.2023 18:26
      - Текс-кейсы:
   
   2. SCHOOL-2

@@ -7,13 +7,16 @@
     <status>active</status>
     <has_icon>Y</has_icon>
     <queries>
+        <item for="install">DROP TABLE IF EXISTS `?:departments`</item>
+        <item for="install">DROP TABLE IF EXISTS `?:department_descriptions`</item>
+        <item for="install">DROP TABLE IF EXISTS `?:department_users`</item>
         <item for="install">
             CREATE TABLE `?:departments` (
                 `department_id` int unsigned NOT NULL AUTO_INCREMENT,
                 `status` varchar(1) NOT NULL DEFAULT 'A',
-                `timestamp int` unsigned NOT NULL DEFAULT '0',
+                `timestamp` int unsigned NOT NULL DEFAULT '0',
                 `upd_timestamp` int unsigned NOT NULL DEFAULT '0',
-                `manager_id int` unsigned NOT NULL DEFAULT '0',
+                `manager_id` int unsigned NOT NULL DEFAULT '0',
                 PRIMARY KEY (`department_id`),
                 KEY `manager_id` (`manager_id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3

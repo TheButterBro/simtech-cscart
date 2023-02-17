@@ -4,7 +4,7 @@
 
 <form action="{""|fn_url}" method="post" id="departments_form" name="departments_form" enctype="multipart/form-data">
 <input type="hidden" name="fake" value="1" />
-
+{include hidden=true file="common/pagination.tpl" save_current_page=true save_current_url=true div_id="pagination_contents_departments" show_pagination_open=false}
 
 {$c_url=$config.current_url|fn_query_remove:"sort_by":"sort_order"}
 
@@ -28,7 +28,7 @@
                 <th><a class="cm-ajax" href="{"`$c_url`&sort_by=name&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("name")}{if $search.sort_by === "name"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a></th>
                 <th width="15%"><a class="cm-ajax" href="{"`$c_url`&sort_by=timestamp&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("creation_date")}{if $search.sort_by === "timestamp"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a></th>
 
-                {hook name="banners:manage_header"}
+                {hook name="departments:manage_header"}
                 {/hook}
 
                 <th width="6%" class="mobile-hide">&nbsp;</th>
@@ -51,7 +51,7 @@
                     {$no_hide_input=""}
                 {/if}
 
-                {hook name="banners:manage_data"}
+                {hook name="departments:manage_data"}
                 {/hook}
                 
                 <td width="25%" class="products-list__image">
@@ -105,10 +105,10 @@
     <p class="no-items">{__("no_data")}</p>
 {/if}
 
-{include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id="pagination_contents_departments hidden=true"}
+{include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id="pagination_contents_departments" hidden=true}
 
 {capture name="adv_buttons"}
-    {hook name="banners:adv_buttons"}
+    {hook name="departments:adv_buttons"}
     {include file="common/tools.tpl" tool_href="usergroups.add_department" prefix="top" hide_tools="true" title=__("add_department") icon="icon-plus"}
     {/hook}
 {/capture}
@@ -120,7 +120,7 @@
 {capture name="sidebar"}
     {hook name="departments:manage_sidebar"}
     {include file="common/saved_search.tpl" dispatch="usergroups.manage_departments" view_type="departments"}
-    {include file="addons/banners/views/banners/components/departments_search_form.tpl" dispatch="usergroups.manage_departments"}
+    {include file="addons/sd_departments/views/usergroups/components/departments_search_form.tpl" dispatch="usergroups.manage_departments"}
     {/hook}
 {/capture}
 
@@ -129,6 +129,13 @@
     {$select_languages = true}
 {/hook}
 
-{include file="common/mainbox.tpl" title=$page_title content=$smarty.capture.mainbox adv_buttons=$smarty.capture.adv_buttons select_languages=$select_languages sidebar=$smarty.capture.sidebar}
+{include 
+    file="common/mainbox.tpl" 
+    title=$page_title 
+    content=$smarty.capture.mainbox 
+    adv_buttons=$smarty.capture.adv_buttons 
+    select_languages=$select_languages 
+    sidebar=$smarty.capture.sidebar
+}
 
 {** ad section **}

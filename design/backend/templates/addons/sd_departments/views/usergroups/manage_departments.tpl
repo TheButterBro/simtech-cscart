@@ -109,7 +109,7 @@
 
 {capture name="adv_buttons"}
     {hook name="departments:adv_buttons"}
-    {include file="common/tools.tpl" tool_href="usergroups.add_department" prefix="top" hide_tools="true" title=__("add_department") icon="icon-plus"}
+    {include file="common/tools.tpl" tool_href="usergroups.add_department" prefix="top" hide_tools="true" title=__("sd_departments.add_department") icon="icon-plus"}
     {/hook}
 {/capture}
 
@@ -125,7 +125,7 @@
 {/capture}
 
 {hook name="departments:manage_mainbox_params"}
-    {$page_title = __("departments")}
+    {$page_title = __("sd_departments.departments")}
     {$select_languages = true}
 {/hook}
 

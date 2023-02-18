@@ -24,7 +24,7 @@
 
     {capture name="simple_search"}
         <div class="sidebar-field">
-            <label for="elm_name">{__("departments")}</label>
+            <label for="elm_name">{__("sd_departments.departments")}</label>
             <div class="break">
                 <input type="text" name="name" id="elm_name" value="{$search.name}" />
             </div>

@@ -5,7 +5,7 @@
     <priority>1200</priority>
     <position>10</position>
     <status>active</status>
-    <has_icon>Y</has_icon>
+    <has_icon>N</has_icon>
     <queries>
         <item for="install">DROP TABLE IF EXISTS `?:departments`</item>
         <item for="install">DROP TABLE IF EXISTS `?:department_descriptions`</item>

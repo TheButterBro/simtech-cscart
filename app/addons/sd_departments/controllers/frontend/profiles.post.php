@@ -23,7 +23,7 @@ if ($mode === 'departments') {
     Tygh::$app['view']->assign('search', $search);
     Tygh::$app['view']->assign('columns', 3);
 
-    fn_add_breadcrumb(__('departments'));
+    fn_add_breadcrumb(__('sd_departments.departments'));
 
 } elseif ($mode === 'department') {
 
@@ -37,7 +37,7 @@ if ($mode === 'departments') {
 
     Tygh::$app['view']->assign('department_data', $department_data);
 
-    fn_add_breadcrumb(__('departments'), 'profiles.departments');
+    fn_add_breadcrumb(__('sd_departments.departments'), 'profiles.departments');
     fn_add_breadcrumb($department_data['department']);
 
     $params = $_REQUEST;

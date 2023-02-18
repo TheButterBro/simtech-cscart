@@ -17,12 +17,12 @@
 
     <div class="ty-feature ">
         <div class="control-group">
-            <label for="manager_info" class="control-label"><strong>{__("manager")}:</strong></label>
+            <label for="manager_info" class="control-label"><strong>{__("sd_departments.manager")}:</strong></label>
             <div id="manager_info" class="controls">
                 {if !empty($department_data.manager_info)}
                     <p>{$department_data.manager_info.firstname} {$department_data.manager_info.lastname} <strong>({$department_data.manager_info.email})</strong></p>
                 {else}
-                    <p>{__("manager_not_found")}<p>
+                    <p>{__("sd_departments.manager_not_found")}<p>
                 {/if}
             </div>
         </div>
@@ -31,14 +31,14 @@
 
     <div class="ty-feature">
         <div class="control-group">
-            <label for="users_info" class="control-label"><strong>{__("workers")}:</strong></label>
+            <label for="users_info" class="control-label"><strong>{__("sd_departments.workers")}:</strong></label>
             <ul id="users_info" class="controls">
                 {if !empty($users_info)}
                     {foreach from=$users_info item=user}
                         <li>{$user.firstname} {$user.lastname} <strong>({$user.email})</strong></li>
                     {/foreach}
                 {else}
-                    <p>{__("workers_not_found")}</p>
+                    <p>{__("sd_departments.workers_not_found")}</p>
                 {/if}    
             </ul>
         </div>

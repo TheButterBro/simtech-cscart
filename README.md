@@ -49,10 +49,10 @@
     
   5. SCHOOL-5
      - Добавление языковых переменных связанных с модулем из ядра в модуль.
-     - ПР:
+     - ПР: https://github.com/TheButterBro/simtech-cscart/pull/6
      - 20м
-     - Start date:
-     - Due date:
+     - Start date: 18.02.2023 17:15
+     - Due date: 18.02.2023 18:00
      - Текс-кейсы:
     
 # Приложение:

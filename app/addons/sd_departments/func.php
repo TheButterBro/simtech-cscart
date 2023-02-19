@@ -1,7 +1,18 @@
 <?php
 
 use Tygh\Languages\Languages;
+use Tygh\Registry;
 
+defined('BOOTSTRAP') or die('Acces denied');
+
+/**
+ * Get department data
+ * 
+ * @param int $department_id 
+ * @param string $lang_code 
+ *
+ * @return array $department
+ */
 function fn_get_department_data ($department_id = 0, $lang_code = CART_LANGUAGE) 
 {
     $department = [];
@@ -21,8 +32,28 @@ function fn_get_department_data ($department_id = 0, $lang_code = CART_LANGUAGE)
     return $department;
 }
 
+/**
+ * Get departments data
+ * 
+ * @param array $params
+ * @param int $items_per_page 
+ * @param string $lang_code 
+ *
+ * @return array ($departments, $params)
+ */
 function fn_get_departments($params = [], $items_per_page = 0, $lang_code = CART_LANGUAGE)
 {
+    $cache_key = __FUNCTION__ . md5(serialize(func_get_args()));
+
+    Registry::registerCache(
+        $cache_key,
+        ['departments', 'departments_description'],
+        Registry::cacheLevel('locale_auth'),
+        true
+    );
+
+    $cache = Registry::get($cache_key);
+
     // Set default values to input params
     $default_params = [
         'page' => 1,
@@ -91,25 +122,43 @@ function fn_get_departments($params = [], $items_per_page = 0, $lang_code = CART
         $params['total_items'] = db_get_field("SELECT COUNT(*) FROM ?:departments $join WHERE 1 $condition");
         $limit = db_paginate($params['page'], $params['items_per_page'], $params['total_items']);
     }
+        
+    if (!empty($cache)) {
+        $departments = $cache;
+    } else {
+        $departments = db_get_hash_array(
+            'SELECT ?p FROM ?:departments ' .
+            $join .
+            'WHERE 1 ?p ?p ?p',
+            'department_id', implode(', ', $fields), $condition, $sorting, $limit
+        );
 
-    $departments = db_get_hash_array(
-        'SELECT ?p FROM ?:departments ' .
-        $join .
-        'WHERE 1 ?p ?p ?p',
-        'department_id', implode(', ', $fields), $condition, $sorting, $limit
-    );
+        $departments_image_ids = array_keys($departments);
+        $images = fn_get_image_pairs($departments_image_ids, 'department', 'M', true, false, $lang_code);
 
-    $departments_image_ids = array_keys($departments);
-    $images = fn_get_image_pairs($departments_image_ids, 'department', 'M', true, false, $lang_code);
+        foreach ($departments as $department_id => $department) {
+            $departments[$department_id]['main_pair'] = !empty($images[$department_id]) ? reset($images[$department_id]) : [];
+            $departments[$department_id]['manager_info'] = fn_get_user_short_info($department['manager_id']);
+        }
+        
+        if (!empty($departments)) {
+            Registry::set($cache_key, $departments);
+        }
 
-    foreach ($departments as $department_id => $department) {
-        $departments[$department_id]['main_pair'] = !empty($images[$department_id]) ? reset($images[$department_id]) : [];
-        $departments[$department_id]['manager_info'] = fn_get_user_short_info($department['manager_id']);
     }
 
     return [$departments, $params];
 }
 
+/**
+ * Create/update department
+ * 
+ * @param array $data
+ * @param int $department_id 
+ * @param string $lang_code 
+ *
+ * @return int $department_id
+ */
 function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
 {
     if (isset($data['timestamp'])) {
@@ -146,6 +195,13 @@ function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
     return $department_id;
 }
 
+/**
+ * Delete department
+ * 
+ * @param int $department_id 
+ *
+ * @return void
+ */
 function fn_delete_department ($department_id) {
     if (!empty($department_id)) {
         db_query('DELETE FROM ?:departments WHERE department_id = ?i', $department_id);
@@ -153,10 +209,25 @@ function fn_delete_department ($department_id) {
     }
 }
 
+/**
+ * Delete users associated with the department
+ *
+ * @param int $department_id 
+ *
+ * @return void
+ */
 function fn_department_delete_users ($department_id) {
     db_query('DELETE FROM ?:department_users WHERE department_id = ?i', $department_id);
 }
 
+/**
+ * Creates users associated with the department
+ *
+ * @param int $department_id 
+ * @param array $users_ids 
+ *
+ * @return void
+ */
 function fn_department_add_users($department_id, $users_ids) {
     if (!empty($department_id)) {
 
@@ -171,6 +242,13 @@ function fn_department_add_users($department_id, $users_ids) {
     }
 }
 
+/**
+ * Get list with users ids
+ *
+ * @param int $department_id 
+ *
+ * @return array (user_id)
+ */
 function fn_department_get_users($department_id) {
     return !empty($department_id) ? db_get_fields('SELECT `user_id` FROM `?:department_users` WHERE `department_id` = ?i', $department_id) : [];
 }
@@ -182,7 +260,6 @@ function fn_department_get_users($department_id) {
  *
  * @return array (user_id, user_login, company_id, firstname, lastname, email, user_type)
  */
-
  function fn_get_users_short_info ($users_ids) {
     $condition = db_quote('user_id IN (?n) AND status = ?s', $users_ids, 'A');
     $join = '';

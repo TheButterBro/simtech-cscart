@@ -15,6 +15,7 @@
 use Tygh\Registry;
 use Tygh\Enum\UsergroupTypes;
 use Tygh\Languages\Helper as LanguageHelper;
+use Tygh\Languages\Languages;
 
 defined('BOOTSTRAP') or die('Access denied');
 
@@ -226,4 +227,6 @@ if ($mode === 'get_privileges') {
     Tygh::$app['view']->assign('show_privileges_tab', $usergroup['type'] !== UsergroupTypes::TYPE_CUSTOMER);
     Tygh::$app['view']->display('views/usergroups/components/get_privileges.tpl');
     return [CONTROLLER_STATUS_NO_CONTENT];
+
 }
+

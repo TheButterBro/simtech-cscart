@@ -1,0 +1,45 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+
+msgctxt "Addons::name::sd_departments"
+msgid "Simtech Developments: Departments"
+msgstr "Simtech Developments: Отделы"
+
+msgctxt "Addons::description::sd_departments"
+msgid "Allow you to add and manage departments of your company."
+msgstr "Позволяем Вам добавлять отделы вашей компании и управлять ими."
+
+msgctxt "SettingsSections::sd_departments.departments"
+msgid "Departments"
+msgstr "Отделы"
+
+msgctxt "Languages::sd_departments.add_department"
+msgid "Add new departments"
+msgstr "Создать новый отдел"
+
+msgctxt "Languages::sd_departments.manager"
+msgid "Manager"
+msgstr "Руководитель"
+
+msgctxt "Languages::sd_departments.manager_not_found"
+msgid "There is currently no manager assigned"
+msgstr "На данный момент руководитель не назначен"
+
+msgctxt "Languages::sd_departments.add_manager_from_users"
+msgid "Add manager from users"
+msgstr "Добавить руководителя из списка пользователей"
+
+msgctxt "Languages::sd_departments.workers"
+msgid "Workers"
+msgstr "Работники"
+
+msgctxt "Languages::sd_departments.workers_not_found"
+msgid "There is currently no workers assigned"
+msgstr "На данный момент работники не назначены"
+
+msgctxt "Languages::sd_departments.add_workers_from_users"
+msgid "Add workers from users"
+msgstr "Добавить работников из списка пользователей"

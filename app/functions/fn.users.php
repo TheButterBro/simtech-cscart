@@ -5360,3 +5360,34 @@ function fn_copy_shipping_fields_in_billing(array $user_data)
 
     return $user_data;
 }
+
+/**
+ * Get list with users short info
+ *
+ * @param array $users_ids Users identifier
+ *
+ * @return array (user_id, user_login, company_id, firstname, lastname, email, user_type)
+ */
+
+function fn_get_users_short_info ($users_ids) {
+    $condition = db_quote('user_id IN (?n) AND status = ?s', $users_ids, 'A');
+    $join = '';
+    $group_by = '';
+    $fields = ['user_id', 'helpdesk_user_id', 'user_login', 'company_id', 'firstname', 'lastname', 'email', 'user_type', 'password_change_timestamp'];
+
+    /**
+     * Actions before getting short user data
+     *
+     * @param array  $users_ids  Users identifier
+     * @param array  $fields    Fields to be retrieved
+     * @param string $condition Conditions
+     * @param string $join      Joins
+     * @param string $group_by  Group by condition
+     */
+    fn_set_hook('get_user_short_info_pre', $users_ids, $fields, $condition, $join, $group_by);
+
+    $fields = implode(', ', $fields);
+
+    return db_get_array('SELECT ?p FROM ?:users ?p WHERE ?p ?p', $fields, $join, $condition, $group_by);
+}
+

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>sd_departments</id>
+    <version>4.15.2</version>
+    <priority>1200</priority>
+    <position>10</position>
+    <status>active</status>
+    <has_icon>Y</has_icon>
+    <queries>
+        <item for="install">
+            CREATE TABLE `?:departments` (
+                `department_id` int unsigned NOT NULL AUTO_INCREMENT,
+                `status` varchar(1) NOT NULL DEFAULT 'A',
+                `timestamp int` unsigned NOT NULL DEFAULT '0',
+                `upd_timestamp` int unsigned NOT NULL DEFAULT '0',
+                `manager_id int` unsigned NOT NULL DEFAULT '0',
+                PRIMARY KEY (`department_id`),
+                KEY `manager_id` (`manager_id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3
+        </item>
+        <item for="install">
+            CREATE TABLE `?:department_descriptions` (
+                `department_id` int unsigned NOT NULL DEFAULT '0',
+                `lang_code` char(2) NOT NULL DEFAULT '',
+                `department` varchar(255) NOT NULL DEFAULT '',
+                `description` text,
+                PRIMARY KEY (`department_id`,`lang_code`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+        </item>
+        <item for="install">
+            CREATE TABLE `?:department_users` (
+                `department_id` int unsigned NOT NULL DEFAULT '0',
+                `user_id` int unsigned NOT NULL DEFAULT '0',
+                PRIMARY KEY (`department_id`,`user_id`),
+                KEY `department_id` (`department_id`),
+                KEY `user_id` (`user_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:departments`</item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:department_descriptions`</item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:department_users`</item>
+    </queries>
+</addon>

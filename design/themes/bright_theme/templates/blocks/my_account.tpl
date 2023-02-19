@@ -37,6 +37,7 @@
                 <li class="ty-account-info__item ty-dropdown-box__item ty-account-info__name">{$user_data.email}</li>
             {/if}
             <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"orders.search"|fn_url}" rel="nofollow">{__("orders")}</a></li>
+            <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"profiles.departments"|fn_url}" rel="nofollow">{__("departments")}</a></li>
             {if $settings.General.enable_compare_products == 'Y'}
                 {$compared_products_ids = $smarty.session.comparison_list}
                 <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"product_features.compare"|fn_url}" rel="nofollow">{__("view_comparison_list")}{if $compared_products_ids} ({$compared_products_ids|count}){/if}</a></li>

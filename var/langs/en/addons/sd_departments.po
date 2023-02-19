@@ -1,0 +1,17 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US"
+
+msgctxt "Addons::name::sd_departments"
+msgid "Simtech Developments: Departments"
+msgstr "Simtech Developments: Departments"
+
+msgctxt "Addons::description::sd_departments"
+msgid "Allow you to add and manage departments of your company."
+msgstr "Allow you to add and manage departments of your company."
+
+msgctxt "SettingsSections::sd_departments.departments"
+msgid "Departments"
+msgstr "Departments"

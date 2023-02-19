@@ -300,7 +300,8 @@ if ($mode == 'add') {
     }
 
     fn_add_breadcrumb(__('registration'));
-}
+
+} 
 
 /**
  * Requests usergroup for customer

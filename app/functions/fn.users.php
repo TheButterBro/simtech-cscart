@@ -5360,3 +5360,6 @@ function fn_copy_shipping_fields_in_billing(array $user_data)
 
     return $user_data;
 }
+
+
+
